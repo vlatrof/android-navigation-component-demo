@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AndroidNavigationComponentDemo</string>
+    <string name="you_are_in_box">YOU ARE IN BOX</string>
+    <string name="go_back">go back</string>
+    <string name="open_secret">open secret</string>
+    <string name="green_box">green box</string>
+    <string name="yellow_box">yellow box</string>
+    <string name="this_is_a_secret">THIS IS A SECRET</string>
+    <string name="close_secret">close secret</string>
+    <string name="close_whole_box">close whole box</string>
+</resources>
