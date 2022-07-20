@@ -20,7 +20,7 @@ class SecretFragment : Fragment(R.layout.fragment_secret) {
         }
 
         binding.btnCloseWholeBox.setOnClickListener{
-            findNavController().popBackStack(R.layout.fragment_root, false)
+            findNavController().popBackStack(R.id.rootFragment, false)
         }
 
     }
