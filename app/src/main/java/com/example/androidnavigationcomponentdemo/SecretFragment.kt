@@ -13,7 +13,11 @@ class SecretFragment : Fragment(R.layout.fragment_secret) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentSecretBinding.bind(view)
+        initBinding(view)
+        setOnClickListeners()
+    }
+
+    private fun setOnClickListeners() {
 
         binding.btnCloseSecret.setOnClickListener{
             findNavController().popBackStack()
@@ -23,6 +27,10 @@ class SecretFragment : Fragment(R.layout.fragment_secret) {
             findNavController().popBackStack(R.id.rootFragment, false)
         }
 
+    }
+
+    private fun initBinding(view: View) {
+        binding = FragmentSecretBinding.bind(view)
     }
 
 }

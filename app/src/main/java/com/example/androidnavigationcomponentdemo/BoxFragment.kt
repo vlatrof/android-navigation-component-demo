@@ -2,7 +2,6 @@ package com.example.androidnavigationcomponentdemo
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -13,20 +12,22 @@ import kotlin.random.Random
 class BoxFragment : Fragment(R.layout.fragment_box) {
 
     private lateinit var binding: FragmentBoxBinding
-
     private val args: BoxFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // bind created view of fragment to binding
-        binding = FragmentBoxBinding.bind(view)
-
-        // set background color from argument value
-        binding.root.setBackgroundColor(args.colorValue)
-
+        initBinding(view)
         setOnClickListeners()
+        handleArguments()
+    }
 
+    private fun handleArguments() {
+        binding.root.setBackgroundColor(args.colorValue)
+    }
+
+    private fun initBinding(view: View) {
+        binding = FragmentBoxBinding.bind(view)
     }
 
     private fun setOnClickListeners() {

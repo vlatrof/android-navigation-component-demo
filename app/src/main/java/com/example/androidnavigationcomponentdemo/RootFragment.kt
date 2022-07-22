@@ -4,9 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.example.androidnavigationcomponentdemo.databinding.FragmentRootBinding
@@ -20,7 +18,7 @@ class RootFragment : Fragment(R.layout.fragment_root) {
 
         initBinding(view)
         setOnClickListeners()
-        initListeningForBoxFragmentResult() // listening for the result from BoxFragment
+        initListeningForBoxFragmentResult()
     }
 
     private fun initListeningForBoxFragmentResult() {
