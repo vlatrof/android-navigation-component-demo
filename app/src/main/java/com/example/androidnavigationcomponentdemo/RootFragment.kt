@@ -6,7 +6,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import com.example.androidnavigationcomponentdemo.databinding.FragmentRootBinding
 
 class RootFragment : Fragment(R.layout.fragment_root) {
@@ -16,30 +18,69 @@ class RootFragment : Fragment(R.layout.fragment_root) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentRootBinding.bind(view)
+        initBinding(view)
+        setOnClickListeners()
+        initListeningForBoxFragmentResult() // listening for the result from BoxFragment
+    }
 
-        binding.btnOpenYellowBox.setOnClickListener{
-            openBox(Color.rgb(255, 255, 200))
-        }
+    private fun initListeningForBoxFragmentResult() {
 
-        binding.btnOpenGreenBox.setOnClickListener{
-            openBox(Color.rgb(200, 255, 200))
-        }
+        val liveData = findNavController().currentBackStackEntry
+            ?.savedStateHandle?.getLiveData<Int>(BoxFragment.TAG_RANDOM_NUMBER_VALUE)
 
-        parentFragmentManager.setFragmentResultListener(
-            BoxFragment.RANDOM_NUMBER_REQUEST_CODE, viewLifecycleOwner) { _, data ->
+        liveData?.observe(viewLifecycleOwner) { generatedNumber ->
 
-            val number = data.getInt(BoxFragment.RANDOM_NUMBER_VALUE)
-            Toast.makeText(requireContext(), "Generated number: $number", Toast.LENGTH_SHORT).show()
+            if (generatedNumber == null) {
+                return@observe
+            }
+
+            Toast.makeText(
+                requireContext(),
+                "${getString(R.string.generated_number_message)} $generatedNumber",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            // clear data after it appeared once
+            liveData.value = null
+
         }
 
     }
 
-    private fun openBox(color: Int) {
+    private fun initBinding(view: View) {
+        binding = FragmentRootBinding.bind(view)
+    }
+
+    private fun setOnClickListeners() {
+
+        binding.btnOpenYellowBox.setOnClickListener{
+            openBox(Color.rgb(255, 255, 200), getString(R.string.color_name_yellow))
+        }
+
+        binding.btnOpenGreenBox.setOnClickListener{
+            openBox(Color.rgb(200, 255, 200), getString(R.string.color_name_green))
+        }
+
+    }
+
+    private fun openBox(colorValue: Int, colorName: String) {
+
+        // launch BoxFragment with arguments and additional options
 
         findNavController().navigate(
-            R.id.action_rootFragment_to_boxFragment,
-            bundleOf(BoxFragment.TAG_ARG_COLOR to color)
+
+            RootFragmentDirections.actionRootFragmentToBoxFragment(colorValue, colorName),
+
+            // additional options to animate navigation
+            navOptions {
+                anim {
+                    enter = androidx.navigation.ui.R.anim.nav_default_enter_anim
+                    exit = androidx.navigation.ui.R.anim.nav_default_exit_anim
+                    popEnter = androidx.navigation.ui.R.anim.nav_default_pop_enter_anim
+                    popExit = androidx.navigation.ui.R.anim.nav_default_pop_exit_anim
+                }
+            }
+
         )
 
     }

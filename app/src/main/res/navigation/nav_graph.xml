@@ -16,7 +16,7 @@
     <fragment
         android:id="@+id/boxFragment"
         android:name="com.example.androidnavigationcomponentdemo.BoxFragment"
-        android:label="Colored box"
+        android:label="{color_name} box"
         tools:layout="@layout/fragment_box" >
         <action
             android:id="@+id/action_boxFragment_to_rootFragment"
@@ -24,6 +24,12 @@
         <action
             android:id="@+id/action_boxFragment_to_secretFragment"
             app:destination="@id/secretFragment" />
+        <argument
+            android:name="color_value"
+            app:argType="integer" />
+        <argument
+            android:name="color_name"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/secretFragment"

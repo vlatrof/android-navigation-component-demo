@@ -8,4 +8,7 @@
     <string name="this_is_a_secret">THIS IS A SECRET</string>
     <string name="close_secret">close secret</string>
     <string name="close_whole_box">close whole box</string>
+    <string name="color_name_yellow">Yellow</string>
+    <string name="color_name_green">Green</string>
+    <string name="generated_number_message">Generated number:</string>
 </resources>
