@@ -1,1 +1,3 @@
 # Android application demonstrating how to use Android Jetpack Navigation Component
+
+<img src="screenshots/Screenshot_20220722_221016.png" width="180" height="320"> <img src="screenshots/Screenshot_20220722_221120.png" width="180" height="320"> <img src="screenshots/Screenshot_20220722_221138.png" width="180" height="320"> <img src="screenshots/Screenshot_20220722_221156.png" width="180" height="320">
